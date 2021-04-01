@@ -20,7 +20,7 @@ def scale(payload):
 
 @app.route("/")
 def home():
-    html = f"<h3>Sklearn Prediction Home</h3>"
+    html = "<h3>Sklearn Prediction Home</h3>"
     return html.format(format)
 
 @app.route("/predict", methods=['POST'])
@@ -55,15 +55,15 @@ def predict():
     
     # Logging the input payload
     json_payload = request.json
-    LOG.info("JSON payload: \n{}".format(json_payload))
+    LOG.info(f"JSON payload: \n{json_payload}")
     inference_payload = pd.DataFrame(json_payload)
-    LOG.info("Inference payload DataFrame: \n{}".format(inference_payload))
+    LOG.info(f"Inference payload DataFrame: \n{inference_payload}")
     # scale the input
     scaled_payload = scale(inference_payload)
     # get an output prediction from the pretrained model, clf
     prediction = list(clf.predict(scaled_payload))
     # Log the output prediction value
-    LOG.info("output prediction:  {}".format(prediction))
+    LOG.info(f"output prediction:  {prediction}")
     return jsonify({'prediction': prediction})
 
 if __name__ == "__main__":
