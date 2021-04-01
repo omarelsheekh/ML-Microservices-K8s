@@ -34,5 +34,6 @@ jobs:
       - run:
           name: run lint
           command: |
-            ./venv/bin/activate
+            python3 -m venv ~/.devops
+            source ~/.devops/bin/activate
             make lint 
