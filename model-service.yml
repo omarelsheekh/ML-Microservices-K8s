@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: model-service
+spec:
+  # type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: model
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  type: ClusterIP
